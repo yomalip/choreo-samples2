@@ -1,0 +1,20 @@
+openapi: 3.0.0
+info:
+  title: Simple Health Check Service
+  description: A simple service to demonstrate a health check endpoint.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /hz:
+    get:
+      summary: Health check endpoint
+      description: Returns a simple health check message.
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "health ep"
