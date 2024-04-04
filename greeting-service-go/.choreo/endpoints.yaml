@@ -21,7 +21,7 @@ endpoints:
   # +required Unique name for the endpoint. (This name will be used when generating the managed API)
   - name: Go Greeter New
     # +required Numeric port value that gets exposed via this endpoint
-    port: 9090
+    port: 9093
     # +required Type of the traffic this endpoint is accepting. Example: REST, GraphQL, etc.
     # Allowed values: REST, GraphQL, GRPC
     type: REST
@@ -37,7 +37,7 @@ endpoints:
     schemaFilePath: openapi.yaml
   - name: health
     # +required Numeric port value that gets exposed via this endpoint
-    port: 9077
+    port: 9088
     # +required Type of the traffic this endpoint is accepting. Example: REST, GraphQL, etc.
     # Allowed values: REST, GraphQL, GRPC
     type: REST
