@@ -18,7 +18,7 @@ func main() {
 }
 
 func startServer1() {
-	port1 := 9083
+	port1 := 9080
 	mux1 := http.NewServeMux()
 	mux1.HandleFunc("/hz", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Welcome to the health service, %d", port1)
@@ -31,7 +31,7 @@ func startServer1() {
 }
 
 func startServer2() {
-	port2 := 9099
+	port2 := 9090
 	mux2 := http.NewServeMux()
 	mux2.HandleFunc("/greeter/greet", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Welcome to the greeting service, %d", port2)
