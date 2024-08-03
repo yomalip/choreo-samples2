@@ -72,5 +72,5 @@ func greet(w http.ResponseWriter, r *http.Request) {
 	if name == "" {
 		name = "Stranger Test"
 	}
-	fmt.Fprintf(w, "Hello, %s! from %s\n", name, hostname)
+	fmt.Fprintf(w, "Image 2, %s! from %s\n", name, hostname)
 }
