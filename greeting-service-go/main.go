@@ -64,8 +64,13 @@ func main() {
 
 func greet(w http.ResponseWriter, r *http.Request) {
 	name := r.URL.Query().Get("name")
+	hostname, err := os.Hostname()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 	if name == "" {
 		name = "Stranger Test"
 	}
-	fmt.Fprintf(w, "Hello, %s!\n", name)
+	fmt.Fprintf(w, "Hello, %s! from %s\n", name, hostname)
 }
