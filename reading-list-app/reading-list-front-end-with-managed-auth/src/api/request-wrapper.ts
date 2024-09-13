@@ -15,17 +15,19 @@
 // under the License.
 
 
-import { apiUrl } from "./constants";
-import { Book } from "./types/book";
-import { performRequest } from "../request-wrapper";
+import axios, { AxiosRequestConfig } from 'axios';
 
-export async function postBooks(payload?: Book) {
 
-  const options = {
-    method: 'POST',
-    data: payload,
-  };
+export const performRequest = async (url: string, options: AxiosRequestConfig<any> | undefined) => {
 
-  const response = await performRequest(`${apiUrl}/books`, options);
-  return response;
-}
+  try {
+    return await axios(url, options);
+  } catch (error) {
+    if (error.response && error.response.status === 401) {
+      // Session has expired. Initiate a login.
+      window.location.href = '/auth/login';
+    } else {
+      throw error;
+    }
+  }
+};
