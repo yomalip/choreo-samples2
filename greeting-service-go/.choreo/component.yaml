@@ -147,7 +147,7 @@ configurations:
         configKeyRef:
           - name: logging
           - name: Redis_Url
-   - name: application.toml # other supported file types - json,toml,env,ini,properties,xml
+    - name: application.toml # other supported file types - json,toml,env,ini,properties,xml
       mountPath: /src/resources
       type: toml
       values:
