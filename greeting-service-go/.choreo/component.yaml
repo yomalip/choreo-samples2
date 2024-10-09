@@ -80,7 +80,7 @@ configurations:
   schema:
     - name: Redis_Url
       displayName: Redis URL
-      type: string   #other types - integer, boolean, object, array
+      type: string #other types - integer, boolean, object, array
       required: false # by default required is true
     - name: DB_User
       displayName: DB Username
@@ -89,7 +89,7 @@ configurations:
       displayName: Logging
       type: object
       properties:
-        - name: package1 
+        - name: package1
           type: string
           values: #restricted values | enum
             - info
@@ -123,3 +123,20 @@ configurations:
       type: array
       items:
         type: string
+  env:
+    - name: REDIS_URL
+      valueFrom:
+        configKeyRef:
+          name: Redis_Url
+    - name: DB_USER
+      valueFrom:
+        configKeyRef:
+          name: DB_User
+  file:
+    - name: application.yaml # other supported file types - json,toml,env,ini,properties,xml
+      mountPath: /src/resources
+      type: yaml
+      values:
+        configKeyRef:
+          - name: logging
+          - name: wordpress
