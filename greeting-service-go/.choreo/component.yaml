@@ -99,6 +99,7 @@ configurations:
     - name: wordpress
       type: object
       displayName: Wordpress
+      required: false
       properties:
         - name: menus
           type: array
@@ -120,6 +121,7 @@ configurations:
                     type: string
     - name: dates
       displayName: Dates
+      required: false
       type: array
       items:
         type: string
