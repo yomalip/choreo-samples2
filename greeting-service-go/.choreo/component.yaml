@@ -82,12 +82,12 @@ configurations:
       displayName: Redis URL
       type: string #other types - integer, boolean, object, array
       required: false # by default required is true
-    - name: Is_Feature_Flag
-      displayName: Feature Flag
-      type: boolean
     - name: DB_User
       displayName: DB Username
       type: string
+    - name: Is_Feature_Flag
+      displayName: Feature Flag
+      type: boolean
     - name: logging
       displayName: Logging
       type: object
