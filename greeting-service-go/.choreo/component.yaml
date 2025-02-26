@@ -85,6 +85,9 @@ configurations:
     - name: DB_User
       displayName: DB Username
       type: string
+    - name: Is_Feature_Flag
+      displayName: Is Feature Flag
+      type: boolean
     - name: logging
       displayName: Logging
       type: object
