@@ -78,6 +78,9 @@ endpoints:
     schemaFilePath: openapi.yaml
 configurations:
   schema:
+    - name: Is_Feature_Flag
+      displayName: Feature Flag
+      type: boolean
     - name: Redis_Url
       displayName: Redis URL
       type: string #other types - integer, boolean, object, array
@@ -85,9 +88,6 @@ configurations:
     - name: DB_User
       displayName: DB Username
       type: string
-    - name: Is_Feature_Flag
-      displayName: Is Feature Flag
-      type: boolean
     - name: logging
       displayName: Logging
       type: object
