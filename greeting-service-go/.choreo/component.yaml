@@ -85,7 +85,7 @@ configurations:
     - name: DB_User
       displayName: DB Username
       type: string
-    - name: Is_Feature_Flag
+    - name: Feature_Flag
       displayName: Feature Flag
       type: boolean
     - name: logging
@@ -111,6 +111,7 @@ configurations:
             properties:
               - name: title
                 type: string
+                required: false
               - name: description
                 type: string
                 required: false
@@ -120,8 +121,10 @@ configurations:
                 properties:
                   - name: start
                     type: string
+                    required: false
                   - name: end
                     type: string
+                    required: false
     - name: dates
       displayName: Dates
       required: false
