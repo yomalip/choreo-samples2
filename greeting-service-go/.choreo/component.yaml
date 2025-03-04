@@ -114,7 +114,6 @@ configurations:
             properties:
               - name: title
                 type: string
-                required: false
               - name: description
                 type: string
                 required: false
@@ -124,7 +123,8 @@ configurations:
                 properties:
                   - name: start
                     type: string
-                    required: false
+                  - name: id
+                    type: number
                   - name: end
                     type: string
                     required: false
