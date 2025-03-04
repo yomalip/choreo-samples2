@@ -133,7 +133,9 @@ configurations:
       required: false
       type: array
       items:
-        type: string
+        type: array
+        items:
+          type: string
   env:
     - name: REDIS_URL
       valueFrom:
