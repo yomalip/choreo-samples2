@@ -71,6 +71,8 @@ func greet(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println(os.Getenv("Redis_Url"))
+	fmt.Println(os.Getenv("DB_User"))
+	fmt.Println(os.Getenv("Feature_Flag"))
 	if name == "" {
 		name = "Stranger Test"
 	}
