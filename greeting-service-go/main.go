@@ -69,9 +69,8 @@ func greet(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	for _, env := range os.Environ() {
-        	fmt.Println(env)
-    	}
+
+	fmt.Println(os.Getenv("Redis_Url"))
 	if name == "" {
 		name = "Stranger Test"
 	}
