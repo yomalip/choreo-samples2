@@ -22,10 +22,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"syscall"
 	"time"
 )
@@ -84,18 +86,18 @@ func greet(w http.ResponseWriter, r *http.Request) {
 		if !file.IsDir() { // Skip directories
 			filePath := filepath.Join(dirPath, file.Name())
 			fmt.Printf("Contents of %s:\n", filePath)
-	
+
 			content, err := ioutil.ReadFile(filePath)
 			if err != nil {
 				log.Printf("Error reading %s: %v\n", filePath, err)
 				continue
 			}
-	
+
 			fmt.Println(string(content))
 			fmt.Println("-----------")
 		}
 	}
-	
+
 	if name == "" {
 		name = "Stranger Test"
 	}
