@@ -70,9 +70,9 @@ func greet(w http.ResponseWriter, r *http.Request) {
 		os.Exit(1)
 	}
 
-	fmt.Println(os.Getenv("Redis_Url"))
-	fmt.Println(os.Getenv("DB_User"))
-	fmt.Println(os.Getenv("Feature_Flag"))
+	fmt.Println(os.Getenv("REDIS_URL"))
+	fmt.Println(os.Getenv("DB_USER"))
+	
 	if name == "" {
 		name = "Stranger Test"
 	}
