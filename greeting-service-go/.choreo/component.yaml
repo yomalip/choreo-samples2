@@ -74,6 +74,8 @@ configurations:
             properties:
               - name: name
                 type: string
+              - name: description
+                type: string
               - name: age
                 type: number
               - name: address
