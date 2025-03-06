@@ -100,10 +100,10 @@ configurations:
       valueFrom:
         configKeyRef:
           name: DB_Password
-    - name: VERSION
+    - name: FEATURE_FLAG
       valueFrom:
         configKeyRef:
-          name: version
+          name: feature_flag
   file:
     - name: application.yaml # other supported file types - json,toml,env,ini,properties,xml
       mountPath: /src/resources
@@ -120,8 +120,8 @@ configurations:
         configKeyRef:
           - name: logging
           - name: Redis_Url
-          - name: feature_flag
           - name: db_user
+          - name: db_password
     - name: application.toml # other supported file types - json,toml,env,ini,properties,xml
       mountPath: /src/resources
       type: toml
@@ -129,4 +129,3 @@ configurations:
         configKeyRef:
           - name: logging
           - name: users
-          - name: feature_flag
