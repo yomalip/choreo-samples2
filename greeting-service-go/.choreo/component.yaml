@@ -34,6 +34,7 @@ configurations:
     - name: feature_flag
       displayName: Feature Flag
       type: boolean
+      required: false
     - name: Redis_Url
       displayName: Redis URL
       type: string #other types - integer, boolean, object, array
@@ -41,7 +42,6 @@ configurations:
     - name: version
       displayName: Version
       type: number
-      required: false
     - name: DB_User
       displayName: DB Username
       type: string
