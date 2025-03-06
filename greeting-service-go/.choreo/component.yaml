@@ -44,49 +44,51 @@ configurations:
     - name: DB_User
       displayName: DB Username
       type: string
+    - name: DB_Password
+      displayName: DB Password
+      type: secret
     - name: logging
       displayName: Logging
       type: object
       properties:
-        - name: package1
+        - name: logger_name
+          displayName: Logger Name
+          type: string
+        - name: level
+          displayName: Level
           type: string
           values: #restricted values | enum
             - info
             - debug
-        - name: package2
-          type: string
-    - name: wordpress
+    - name: users
       type: object
-      displayName: Wordpress
+      displayName: User List
       required: false
       properties:
-        - name: menus
+        - name: user
           type: array
           items:
             type: object
             properties:
-              - name: title
+              - name: name
                 type: string
               - name: description
                 type: string
                 required: false
                 displayName: Description
-              - name: time
+              - name: age
+                type: number
+              - name: address
                 type: object
                 properties:
-                  - name: start
+                  - name: street
                     type: string
-                  - name: id
+                  - name: city
+                    type: string
+                  - name: postal_code
+                    displayName: postal code
                     type: number
-                  - name: end
-                    type: string
                     required: false
-    - name: dates
-      displayName: Dates
-      required: false
-      type: array
-      items:
-        type: string
   env:
     - name: REDIS_URL
       valueFrom:
