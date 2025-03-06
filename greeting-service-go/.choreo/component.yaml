@@ -76,6 +76,7 @@ configurations:
                 type: string
               - name: description
                 type: string
+                required: false
               - name: age
                 type: number
               - name: address
