@@ -45,9 +45,11 @@ configurations:
     - name: DB_User
       displayName: DB Username
       type: string
+      required: false
     - name: DB_Password
       displayName: DB Password
       type: secret
+      required: false
     - name: logging
       displayName: Logging
       type: object
@@ -112,6 +114,8 @@ configurations:
           - name: logging
           - name: users
           - name: version
+          - name: feature_flag
+          - name: Redis_Url
     - name: application.json # other supported file types - json,toml,env,ini,properties,xml
       mountPath: /src/resources
       type: json
@@ -121,6 +125,8 @@ configurations:
           - name: Redis_Url
           - name: db_user
           - name: db_password
+          - name: feature_flag
+          - name: Redis_Url
     - name: application.toml # other supported file types - json,toml,env,ini,properties,xml
       mountPath: /src/resources
       type: toml
@@ -128,3 +134,5 @@ configurations:
         configKeyRef:
           - name: logging
           - name: users
+          - name: feature_flag
+          - name: Redis_Url
