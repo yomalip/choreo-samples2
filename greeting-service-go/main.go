@@ -72,10 +72,11 @@ func greet(w http.ResponseWriter, r *http.Request) {
 		os.Exit(1)
 	}
 
-	fmt.Printf("REDIS_URL: %s \n", os.Getenv("REDIS_URL"))
 	fmt.Printf("DB_USER: %s \n", os.Getenv("DB_USER"))
 	fmt.Printf("DB_PASSWORD: %s \n", os.Getenv("DB_PASSWORD"))
-	fmt.Printf("VERSION: %s \n", os.Getenv("VERSION"))
+
+	fmt.Printf("REDIS_URL: %s \n", os.Getenv("REDIS_URL"))
+	fmt.Printf("FEATURE_FLAG: %s \n", os.Getenv("FEATURE_FLAG"))
 
 	dirPath := "/src/resources" // Change this to your target directory
 
