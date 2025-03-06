@@ -45,11 +45,9 @@ configurations:
     - name: DB_User
       displayName: DB Username
       type: string
-      required: false
     - name: DB_Password
       displayName: DB Password
       type: secret
-      required: false
     - name: logging
       displayName: Logging
       type: object
@@ -123,8 +121,8 @@ configurations:
         configKeyRef:
           - name: logging
           - name: Redis_Url
-          - name: db_user
-          - name: db_password
+          - name: DB_User
+          - name: DB_Password
           - name: feature_flag
           - name: Redis_Url
     - name: application.toml # other supported file types - json,toml,env,ini,properties,xml
