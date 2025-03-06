@@ -31,7 +31,7 @@ endpoints:
 
 configurations:
   schema:
-    - name: Feature_Flag
+    - name: feature_flag
       displayName: Feature Flag
       type: boolean
     - name: Redis_Url
@@ -41,6 +41,7 @@ configurations:
     - name: version
       displayName: Version
       type: number
+      required: false
     - name: DB_User
       displayName: DB Username
       type: string
@@ -66,6 +67,7 @@ configurations:
       required: false
       properties:
         - name: user
+          displayName: User
           type: array
           items:
             type: object
@@ -85,10 +87,6 @@ configurations:
                     type: string
                   - name: city
                     type: string
-                  - name: postal_code
-                    displayName: postal code
-                    type: number
-                    required: false
   env:
     - name: REDIS_URL
       valueFrom:
@@ -98,6 +96,14 @@ configurations:
       valueFrom:
         configKeyRef:
           name: DB_User
+    - name: DB_PASSWORD
+      valueFrom:
+        configKeyRef:
+          name: DB_Password
+    - name: VERSION
+      valueFrom:
+        configKeyRef:
+          name: version
   file:
     - name: application.yaml # other supported file types - json,toml,env,ini,properties,xml
       mountPath: /src/resources
@@ -105,7 +111,8 @@ configurations:
       values:
         configKeyRef:
           - name: logging
-          - name: wordpress
+          - name: users
+          - name: version
     - name: application.json # other supported file types - json,toml,env,ini,properties,xml
       mountPath: /src/resources
       type: json
@@ -113,10 +120,13 @@ configurations:
         configKeyRef:
           - name: logging
           - name: Redis_Url
+          - name: feature_flag
+          - name: db_user
     - name: application.toml # other supported file types - json,toml,env,ini,properties,xml
       mountPath: /src/resources
       type: toml
       values:
         configKeyRef:
           - name: logging
-          - name: wordpress
+          - name: users
+          - name: feature_flag
