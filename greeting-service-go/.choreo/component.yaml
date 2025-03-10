@@ -30,7 +30,7 @@ endpoints:
     # The path should be relative to the docker context.
     # schemaFilePath: openapi.yaml
 
-configuration:
+configurations:
   env:
     - name: REDIS_URL
       valueFrom:
