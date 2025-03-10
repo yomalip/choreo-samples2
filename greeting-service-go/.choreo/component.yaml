@@ -1,5 +1,6 @@
 # +required The configuration file schema version
-schemaVersion: 1.0
+# +required The configuration file schema version
+schemaVersion: 1.2
 
 # +optional Incoming connection details for the component
 endpoints:
@@ -27,110 +28,87 @@ endpoints:
     # Defaults to wildcard route if not specified.
     # This is only applicable to REST endpoint types.
     # The path should be relative to the docker context.
-    schemaFilePath: openapi.yaml
+    # schemaFilePath: openapi.yaml
 
-configurations:
-  schema:
-    - name: Redis_Url
-      displayName: Redis URL
-      type: string #other types - integer, boolean, object, array
-      required: false # by default required is true
-    - name: feature_flag
-      displayName: Feature Flag
-      type: boolean
-      required: false
-    - name: version
-      displayName: Version
-      type: number
-    - name: DB_User
-      displayName: DB Username
-      type: string
-    - name: DB_Password
-      displayName: DB Password
-      type: secret
-    - name: logging
-      displayName: Logging
-      type: object
-      properties:
-        - name: logger_name
-          displayName: Logger Name
-          type: string
-        - name: level
-          displayName: Level
-          type: string
-          values: #restricted values | enum
-            - info
-            - debug
-    - name: users
-      type: object
-      displayName: User List
-      required: false
-      properties:
-        - name: user
-          displayName: User
-          type: array
-          items:
-            type: object
-            properties:
-              - name: name
-                type: string
-              - name: description
-                type: string
-                required: false
-              - name: age
-                type: number
-              - name: address
-                type: object
-                properties:
-                  - name: street
-                    type: string
-                  - name: city
-                    type: string
+configuration:
   env:
     - name: REDIS_URL
       valueFrom:
-        configKeyRef:
-          name: Redis_Url
+        configForm: {}
     - name: DB_USER
       valueFrom:
-        configKeyRef:
-          name: DB_User
+        configForm:
+          displayName: DB User
+          required: true
     - name: DB_PASSWORD
       valueFrom:
-        configKeyRef:
-          name: DB_Password
+        configForm:
+          displayName: DB Password
+          type: secret
     - name: FEATURE_FLAG
       valueFrom:
-        configKeyRef:
-          name: feature_flag
+        configForm: 
+          displayName: Feature Flag
+          type: boolean
   file:
-    - name: application.yaml # other supported file types - json,toml,env,ini,properties,xml
+    - name: application.yaml
       mountPath: /src/resources
       type: yaml
       values:
-        configKeyRef:
-          - name: logging
-          - name: users
-          - name: version
-          - name: feature_flag
-          - name: Redis_Url
-    - name: application.json # other supported file types - json,toml,env,ini,properties,xml
+        - name: logging
+          valueFrom:
+            configForm:
+              displayName: Logging
+              type: object
+              properties:
+                - name: logger_name
+                  displayName: Logger Name
+                - name: level
+                  displayName: Level
+                  values: #restricted values | enum
+                    - info
+                    - debug
+        - name: users
+          valueFrom:
+            configForm:
+              type: object
+              displayName: User List
+              required: false
+              properties:
+                - name: user
+                  displayName: User
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      - name: name
+                      - name: description
+                        required: false
+                      - name: age
+                        type: number
+                      - name: address
+                        type: object
+                        properties:
+                          - name: street
+                          - name: city
+    - name: application.json
       mountPath: /src/resources
       type: json
       values:
-        configKeyRef:
-          - name: logging
-          - name: Redis_Url
-          - name: DB_User
-          - name: DB_Password
-          - name: feature_flag
-          - name: Redis_Url
-    - name: application.toml # other supported file types - json,toml,env,ini,properties,xml
-      mountPath: /src/resources
-      type: toml
-      values:
-        configKeyRef:
-          - name: logging
-          - name: users
-          - name: feature_flag
-          - name: Redis_Url
+          - name: version
+            valueFrom:
+              configForm:
+                displayName: Version
+                type: number
+          - name: upstream
+            valueFrom:
+              configForm:
+                displayName: Upstream Service
+                type: object
+                properties:
+                  - name: host
+                    displayName: Host
+                  - name: port
+                    displayName: Port
+                    type: number
+
