@@ -31,6 +31,25 @@ endpoints:
     schemaFilePath: openapi.yaml
 
 configurations:
+  env:
+    - name: REDIS_URL
+      valueFrom:
+        configForm: {}
+    - name: DB_USER
+      valueFrom:
+        configForm:
+          displayName: DB User
+          required: true
+    - name: DB_PASSWORD
+      valueFrom:
+        configForm:
+          displayName: DB Password
+          type: secret
+    - name: FEATURE_FLAG
+      valueFrom:
+        configForm: 
+          displayName: Feature Flag
+          type: boolean
   file:
     - name: application.yaml
       mountPath: /src/resources
