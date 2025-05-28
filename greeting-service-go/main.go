@@ -65,7 +65,13 @@ func main() {
 func greet(w http.ResponseWriter, r *http.Request) {
 	name := r.URL.Query().Get("name")
 	if name == "" {
-		name = "Stranger"
+		// Check for environment variable for default name
+		defaultName := os.Getenv("DEFAULT_GREETING_NAME")
+		if defaultName != "" {
+			name = defaultName
+		} else {
+			name = "Stranger"
+		}
 	}
 	fmt.Fprintf(w, "Hello, %s!\n", name)
 }
