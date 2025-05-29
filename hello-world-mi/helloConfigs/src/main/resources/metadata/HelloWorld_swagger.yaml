@@ -1,29 +1,13 @@
 openapi: 3.0.1
 info:
   title: HelloWorld
-  description: API Definition of HelloWorld - Returns a greeting message that can be customized via HELLO_MESSAGE environment variable
+  description: API Definition of HelloWorld
   version: 1.0.0
 servers:
 - url: http://localhost:8290/HelloWorld
 paths:
   /:
-    get:
-      summary: Get hello world message
-      description: Returns a hello message. The message can be customized by setting the HELLO_MESSAGE environment variable.
+    post:
       responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  Hello:
-                    type: string
-                    description: The greeting message (from HELLO_MESSAGE env var or default "World")
-                  source:
-                    type: string
-                    description: Information about whether environment variable was used
-                example:
-                  Hello: "World"
-                  source: "Environment variable HELLO_MESSAGE: false"
+        default:
+          description: Default response

@@ -2,28 +2,9 @@
 <api context="/HelloWorld" name="HelloWorld" xmlns="http://ws.apache.org/ns/synapse">
     <resource methods="GET">
         <inSequence>
-            <!-- Set default message -->
-            <property name="defaultMessage" value="World" scope="default" type="STRING"/>
-            
-            <!-- Try to get environment variable, fallback to default if not set -->
-            <property name="envMessage" expression="$env:HELLO_MESSAGE" scope="default" type="STRING"/>
-            
-            <!-- Use environment variable if exists, otherwise use default -->
-            <filter xpath="boolean($ctx:envMessage)">
-                <then>
-                    <property name="finalMessage" expression="$ctx:envMessage" scope="default" type="STRING"/>
-                </then>
-                <else>
-                    <property name="finalMessage" expression="$ctx:defaultMessage" scope="default" type="STRING"/>
-                </else>
-            </filter>
-            
             <payloadFactory media-type="json">
-                <format>{"Hello":"$1", "source": "$2"}</format>
-                <args>
-                    <arg expression="$ctx:finalMessage"/>
-                    <arg expression="fn:concat('Environment variable HELLO_MESSAGE: ', boolean($ctx:envMessage))"/>
-                </args>
+                <format>{"Hello":"World"}</format>
+                <args/>
             </payloadFactory>
             <respond/>
         </inSequence>
