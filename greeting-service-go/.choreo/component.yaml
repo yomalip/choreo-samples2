@@ -69,11 +69,13 @@ configurations:
                     - info
                     - debug
         - name: coordinations
-          type: array
-          items:
-            type: array
-            items:
-              type: number
+          valueFrom:
+            configForm:
+              type: array
+              items:
+                type: array
+                items:
+                  type: number
         - name: users
           valueFrom:
             configForm:
