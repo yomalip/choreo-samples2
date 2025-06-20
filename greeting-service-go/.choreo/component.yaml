@@ -31,43 +31,11 @@ endpoints:
     schemaFilePath: openapi.yaml
 
 configurations:
-  env:
-    - name: REDIS_URL
-      valueFrom:
-        configForm: {}
-    - name: DB_USER
-      valueFrom:
-        configForm:
-          displayName: DB User
-          required: true
-    - name: DB_PASSWORD
-      valueFrom:
-        configForm:
-          displayName: DB Password
-          type: secret
-    - name: FEATURE_FLAG
-      valueFrom:
-        configForm: 
-          displayName: Feature Flag
-          type: boolean
   file:
     - name: application.yaml
       mountPath: /src/resources
       type: yaml
       values:
-        - name: logging
-          valueFrom:
-            configForm:
-              displayName: Logging
-              type: object
-              properties:
-                - name: logger_name
-                  displayName: Logger Name
-                - name: level
-                  displayName: Level
-                  values: #restricted values | enum
-                    - info
-                    - debug
         - name: coordinations
           valueFrom:
             configForm:
@@ -76,47 +44,4 @@ configurations:
                 type: array
                 items:
                   type: number
-        - name: users
-          valueFrom:
-            configForm:
-              type: object
-              displayName: User List
-              required: false
-              properties:
-                - name: user
-                  displayName: User
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      - name: name
-                      - name: description
-                        required: false
-                      - name: age
-                        type: number
-                      - name: address
-                        type: object
-                        properties:
-                          - name: street
-                          - name: city
-    - name: application.json
-      mountPath: /src/resources
-      type: json
-      values:
-          - name: version
-            valueFrom:
-              configForm:
-                displayName: Version
-                type: number
-          - name: upstream
-            valueFrom:
-              configForm:
-                displayName: Upstream Service
-                type: object
-                properties:
-                  - name: host
-                    displayName: Host
-                  - name: port
-                    displayName: Port
-                    type: number
 
