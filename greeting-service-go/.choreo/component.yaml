@@ -68,6 +68,12 @@ configurations:
                   values: #restricted values | enum
                     - info
                     - debug
+        - name: coordinations
+          type: array
+          items:
+            type: array
+            items:
+              type: number
         - name: users
           valueFrom:
             configForm:
