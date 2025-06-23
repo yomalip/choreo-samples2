@@ -44,4 +44,26 @@ configurations:
                 type: array
                 items:
                   type: number
-
+        - name: users
+          valueFrom:
+            configForm:
+              type: object
+              displayName: User List
+              required: false
+              properties:
+                - name: user
+                  displayName: User
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      - name: name
+                      - name: description
+                        required: false
+                      - name: age
+                        type: number
+                      - name: address
+                        type: object
+                        properties:
+                          - name: street
+                          - name: city
