@@ -36,14 +36,14 @@ configurations:
       mountPath: /src/resources
       type: yaml
       values:
-        - name: coordinations
-          valueFrom:
-            configForm:
-              type: array
-              items:
-                type: array
-                items:
-                  type: number
+        # - name: coordinations
+        #   valueFrom:
+        #     configForm:
+        #       type: array
+        #       items:
+        #         type: array
+        #         items:
+        #           type: number
         - name: users
           valueFrom:
             configForm:
