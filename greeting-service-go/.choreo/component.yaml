@@ -31,19 +31,49 @@ endpoints:
     schemaFilePath: openapi.yaml
 
 configurations:
+  env:
+    - name: REDIS_URL
+      valueFrom:
+        configForm: {}
+    - name: DB_USER
+      valueFrom:
+        configForm:
+          displayName: DB User
+          required: true
+    - name: DB_PASSWORD
+      valueFrom:
+        configForm:
+          displayName: DB Password
+          type: secret
+    - name: FEATURE_FLAG
+      valueFrom:
+        configForm: 
+          displayName: Feature Flag
+          type: boolean
   file:
     - name: application.yaml
       mountPath: /src/resources
       type: yaml
       values:
-        # - name: coordinations
-        #   valueFrom:
-        #     configForm:
-        #       type: array
-        #       items:
-        #         type: array
-        #         items:
-        #           type: number
+        - name: logging
+          valueFrom:
+            configForm:
+              displayName: Logging
+              type: object
+              properties:
+                - name: logger_name
+                  displayName: Logger Name
+                - name: level
+                  displayName: Level
+                  values: #restricted values | enum
+                    - info
+                    - debug
+        - name: coordinations
+          type: array
+          items:
+            type: array
+            items:
+              type: number
         - name: users
           valueFrom:
             configForm:
@@ -67,3 +97,114 @@ configurations:
                         properties:
                           - name: street
                           - name: city
+    - name: application.json
+      mountPath: /src/resources
+      type: json
+      values:
+          - name: version
+            valueFrom:
+              configForm:
+                displayName: Version
+                type: number
+          - name: upstream
+            valueFrom:
+              configForm:
+                displayName: Upstream Service
+                type: object
+                properties:
+                  - name: host
+                    displayName: Host
+                  - name: port
+                    displayName: Port
+                    type: number
+    - name: application.toml
+      mountPath: /src/resources
+      type: toml
+      values:
+        # map<string>
+        - name: headers
+          valueFrom:
+            configForm:
+              displayName: Headers
+              type: map
+              required: true
+              properties: # Properties for the map values
+                type: string
+        
+        # map<object>
+        - name: databaseMap
+          valueFrom:
+            configForm:
+              displayName: Database Configuration
+              type: map
+              required: false
+              properties: # Properties for the map values
+                type: object
+                additionalProperties:
+                  - name: host
+                    type: string
+                    displayName: Host
+                    required: false
+                  - name: port
+                    type: number
+                    displayName: Port
+                  - name: username
+                    type: string
+                    displayName: Username
+                  - name: password
+                    type: secret
+                    displayName: Password
+                  - name: test
+                    type: object
+                    displayName: Test Object
+                    properties:
+                      - name: testProperty
+                        type: string
+                      - name: testNumber
+                        type: number
+          
+          # map<string[]>
+        - name: features
+          valueFrom:
+            configForm:
+              displayName: Features
+              type: map
+              required: true
+              properties: # Properties for the map values
+                  type: array
+                  items:
+                    type: string
+      
+         # type union string|number
+        - name: retryPolicy
+          valueFrom:
+            configForm:
+              displayName: Retry Policy
+              oneOf:
+                - type: string
+                - type: number
+        
+        # type union object|object
+        - name: key
+          valueFrom:
+            configForm:
+              displayName: Secure Socket Key
+              oneOf:
+                - type: object
+                  name: keystore
+                  properties:
+                    - name: path
+                      type: string
+                      displayName: Key Store path
+                    - name: password
+                      type: string
+                      displayName: Keystore password
+                - type: object
+                  name: ssl
+                  properties:
+                    - name: certFile
+                      type: string
+                    - name: keyFile
+                      type: string
+                    - name: keyPassword
+                      type: string
