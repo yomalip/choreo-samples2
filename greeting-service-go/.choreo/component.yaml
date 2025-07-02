@@ -52,32 +52,15 @@ configurations:
             configForm:
               displayName: Database Configuration
               type: map
-              required: false
               properties: # Properties for the map values
                 type: object
                 additionalProperties:
                   - name: host
                     type: string
                     displayName: Host
-                    required: false
                   - name: port
                     type: number
                     displayName: Port
-                  - name: username
-                    type: string
-                    displayName: Username
-                  - name: password
-                    type: secret
-                    displayName: Password
-                  - name: test
-                    type: object
-                    displayName: Test Object
-                    properties:
-                      - name: testProperty
-                        type: string
-                      - name: testNumber
-                        type: number
-          
           # map<string[]>
         - name: features
           valueFrom:
@@ -89,39 +72,3 @@ configurations:
                   type: array
                   items:
                     type: string
-      
-         # type union string|number
-        - name: retryPolicy
-          valueFrom:
-            configForm:
-              displayName: Retry Policy
-              required: false
-              oneOf:
-                - type: string
-                - type: number
-        
-        # type union object|object
-        - name: key
-          valueFrom:
-            configForm:
-              displayName: Secure Socket Key
-              required: false
-              oneOf:
-                - type: object
-                  name: keystore
-                  properties:
-                    - name: path
-                      type: string
-                      displayName: Key Store path
-                    - name: password
-                      type: string
-                      displayName: Keystore password
-                - type: object
-                  name: ssl
-                  properties:
-                    - name: certFile
-                      type: string
-                    - name: keyFile
-                      type: string
-                    - name: keyPassword
-                      type: string
