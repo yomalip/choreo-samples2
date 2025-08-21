@@ -45,3 +45,17 @@ configurations:
               required: true
               properties: # Properties for the map values
                 type: string
+        - name: databaseMap
+          valueFrom:
+            configForm:
+              displayName: Database Configuration
+              type: map
+              properties: # Properties for the map values
+                type: object
+                additionalProperties:
+                  - name: host
+                    type: string
+                    displayName: Host
+                  - name: port
+                    type: number
+                    displayName: Port
