@@ -36,15 +36,6 @@ configurations:
       mountPath: /src/resources
       type: yaml
       values:
-        # map<string>
-        - name: headers
-          valueFrom:
-            configForm:
-              displayName: Headers
-              type: map
-              required: true
-              properties: # Properties for the map values
-                type: string
         - name: databaseMap
           valueFrom:
             configForm:
