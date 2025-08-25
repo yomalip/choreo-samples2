@@ -50,3 +50,8 @@ configurations:
                   - name: port
                     type: number
                     displayName: Port
+                  - name: test
+                    type: object
+                    properties:
+                      - name: internal
+                      
