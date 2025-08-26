@@ -15,7 +15,7 @@ Note: The following file paths are relative to the path /go/greeter
 ### Prerequisites
 1. Fork the repositoy
 
-## Deploy Application
+## Deploy Application 
 
 Please refer to the Choreo documentation under the [Develop a REST API](https://wso2.com/choreo/docs/develop-components/develop-services/develop-a-rest-api/#step-1-create-a-service-component-from-a-dockerfile) section to learn how to deploy the application.
 
