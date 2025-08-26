@@ -36,22 +36,14 @@ configurations:
       mountPath: /src/resources
       type: yaml
       values:
-        - name: databaseMap
+        - name: features
           valueFrom:
             configForm:
-              displayName: Database Configuration
+              displayName: Features
               type: map
+              required: true
               properties: # Properties for the map values
-                type: object
-                additionalProperties:
-                  - name: host
+                  type: array
+                  items:
                     type: string
-                    displayName: Host
-                  - name: port
-                    type: number
-                    displayName: Port
-                  - name: test
-                    type: object
-                    properties:
-                      - name: internal
                       
