@@ -86,16 +86,8 @@ configurations:
                 type: array
                 # +required if type is array
                 items:
-                    type: object
+                    type: map
                     properties:
                         - name: name
-                        - name: description
-                          required: false
-                        - name: age
-                          type: number
-                        - name: headers
-                          displayName: Headers
-                          type: map
-                          required: true
                           properties: # Properties for the map values
                             type: string
