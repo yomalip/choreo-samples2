@@ -49,14 +49,30 @@ configurations:
                   required: true
                   properties: # Properties for the map values
                     type: string
-        - name: features
+        - name: users
+          # +required value source
+          # Allowed value sources: connectionRef, configForm
           valueFrom:
-            configForm:
-              displayName: Features
-              type: map
-              required: true
-              properties: # Properties for the map values
-                  type: array
-                  items:
-                    type: string
+              # +required config form value source
+              configForm:
+                # +optional display name inside the config form, name will be shown in config form if not specified
+                displayName: Users
+                # +optional default value is string if not specified
+                # Allowed types - string, number, boolean, secret, object, array
+                type: array
+                # +required if type is array
+                items:
+                    type: object
+                    properties:
+                        - name: name
+                        - name: description
+                          required: false
+                        - name: age
+                          type: number
+                        - name: headers
+                          displayName: Headers
+                          type: map
+                          required: true
+                          properties: # Properties for the map values
+                            type: string
                       
