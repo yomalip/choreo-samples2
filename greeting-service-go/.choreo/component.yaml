@@ -36,6 +36,19 @@ configurations:
       mountPath: /src/resources
       type: yaml
       values:
+        - name: http
+          valueFrom:
+            configForm:
+              type: object
+              displayName: Http
+              properties:
+                - name: test
+                - name: headers
+                  displayName: Headers
+                  type: map
+                  required: true
+                  properties: # Properties for the map values
+                    type: string
         - name: features
           valueFrom:
             configForm:
