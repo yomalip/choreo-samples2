@@ -73,8 +73,15 @@ configurations:
                           displayName: Headers
                           type: map
                           required: true
-                          properties: # Properties for the map values
-                            type: string
+                          properties:
+                            type: object
+                            additionalProperties:
+                              - name: host
+                                type: string
+                                displayName: Host
+                              - name: port
+                                type: number
+                                displayName: Port
         - name: arraymap
           valueFrom:
               # +required config form value source
