@@ -36,65 +36,10 @@ configurations:
       mountPath: /src/resources
       type: yaml
       values:
-        - name: http
+        - name: retryPolicy
           valueFrom:
             configForm:
-              type: object
-              displayName: Http
-              properties:
-                - name: test
-                - name: headers
-                  displayName: Headers
-                  type: map
-                  required: true
-                  properties: # Properties for the map values
-                    type: string
-        - name: users
-          # +required value source
-          # Allowed value sources: connectionRef, configForm
-          valueFrom:
-              # +required config form value source
-              configForm:
-                # +optional display name inside the config form, name will be shown in config form if not specified
-                displayName: Users
-                # +optional default value is string if not specified
-                # Allowed types - string, number, boolean, secret, object, array
-                type: array
-                # +required if type is array
-                items:
-                    type: object
-                    properties:
-                        - name: name
-                        - name: description
-                          required: false
-                        - name: age
-                          type: number
-                        - name: headers
-                          displayName: Headers
-                          type: map
-                          required: true
-                          properties:
-                            type: object
-                            additionalProperties:
-                              - name: host
-                                type: string
-                                displayName: Host
-                              - name: port
-                                type: number
-                                displayName: Port
-        - name: arraymap
-          valueFrom:
-              # +required config form value source
-              configForm:
-                # +optional display name inside the config form, name will be shown in config form if not specified
-                displayName: Users
-                # +optional default value is string if not specified
-                # Allowed types - string, number, boolean, secret, object, array
-                type: array
-                # +required if type is array
-                items:
-                    type: map
-                    properties:
-                        - name: name
-                          properties: # Properties for the map values
-                            type: string
+              displayName: Retry Policy
+              oneOf:
+                - type: string
+                - type: number
