@@ -36,10 +36,26 @@ configurations:
       mountPath: /src/resources
       type: yaml
       values:
-        - name: retryPolicy
+        - name: secureSocketKey
           valueFrom:
             configForm:
-              displayName: Retry Policy
+              displayName: Secure Socket Key
               oneOf:
-                - type: string
-                - type: number
+                - type: object
+                  name: keystore
+                  properties:
+                    path:
+                      type: string
+                      displayName: Key Store path
+                    name:
+                      type: string
+                      displayName: Keystore name
+                - type: object
+                  name: ssl
+                  properties:
+                    certFile:
+                      type: string
+                    keyFile:
+                      type: string
+                    keyPassword:
+                      type: string
