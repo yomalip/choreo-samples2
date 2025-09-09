@@ -44,18 +44,18 @@ configurations:
                 - type: object
                   name: keystore
                   properties:
-                    path:
+                    - name: path
                       type: string
                       displayName: Key Store path
-                    name:
+                    - name: name
                       type: string
                       displayName: Keystore name
                 - type: object
                   name: ssl
                   properties:
-                    certFile:
+                    - name: certFile
                       type: string
-                    keyFile:
+                    - name: keyFile
                       type: string
-                    keyPassword:
+                    - name: keyPassword
                       type: string
