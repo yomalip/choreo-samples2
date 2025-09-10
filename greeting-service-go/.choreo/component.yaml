@@ -51,13 +51,8 @@ configurations:
                     - name: name
                       type: string
                       displayName: Keystore name
-                - type: object
+                - type: array
                   name: ssl
                   displayName: ssl
-                  properties:
-                    - name: certFile
-                      type: string
-                    - name: keyFile
-                      type: string
-                    - name: keyPassword
-                      type: string
+                  items:
+                    type: string
