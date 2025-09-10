@@ -43,6 +43,7 @@ configurations:
               oneOf:
                 - type: object
                   name: keystore
+                  displayName: keystore
                   properties:
                     - name: path
                       type: string
@@ -52,6 +53,7 @@ configurations:
                       displayName: Keystore name
                 - type: object
                   name: ssl
+                  displayName: ssl
                   properties:
                     - name: certFile
                       type: string
