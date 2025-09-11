@@ -40,19 +40,23 @@ configurations:
           valueFrom:
             configForm:
               displayName: Secure Socket Key
-              oneOf:
-                - type: object
-                  name: keystore
-                  displayName: keystore
-                  properties:
-                    - name: path
-                      type: string
-                      displayName: Key Store path
-                    - name: name
-                      type: string
-                      displayName: Keystore name
-                - type: array
-                  name: ssl
-                  displayName: ssl
-                  items:
-                    type: string
+              type: object
+              properties:
+                - name: nestedanyof
+                  displayName: Nested AnyOf
+                  oneOf:
+                    - type: object
+                      name: keystore
+                      displayName: keystore
+                      properties:
+                        - name: path
+                          type: string
+                          displayName: Key Store path
+                        - name: name
+                          type: string
+                          displayName: Keystore name
+                    - type: array
+                      name: ssl
+                      displayName: ssl
+                      items:
+                        type: string
