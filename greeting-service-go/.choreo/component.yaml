@@ -59,4 +59,8 @@ configurations:
                       name: ssl
                       displayName: ssl
                       items:
-                        type: string
+                        oneOf:
+                          - name: abc
+                            type: string
+                          - name: def
+                            type: number
