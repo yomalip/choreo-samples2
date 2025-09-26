@@ -11,7 +11,8 @@ type Greeting record {
     string 'from;
     string to;
     string message;
-    NewGreeting newGreeting?;
+    NewGreeting[] newGreeting;
+    map<Greeting> greetingStrMap;
 };
 
 configurable Greeting nestedGreeting = ?;
