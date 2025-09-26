@@ -1,7 +1,7 @@
 import ballerina/http;
 import ballerina/io;
 
-configurable int num = ?;
+configurable float num1 = ?;
 
 enum Color {
     RED,
@@ -15,12 +15,12 @@ type Greeting record {
     Color message;
 };
 
-configurable Greeting greeting2 = ?;
+// configurable Greeting greeting2 = ?;
 
 service / on new http:Listener(8090) {
     resource function get .(string name) returns Greeting {
-        io:println(num);
-        Greeting greetingMessage = {"from" : "name2", "to" : "name2", "message" : BLUE};
+        io:println(num1);
+        Greeting greetingMessage = {"from" : "name2", "to" : "name2", "message" : "BLUE"};
         return greetingMessage;
     }
 }
