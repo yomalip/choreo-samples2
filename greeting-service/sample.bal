@@ -1,28 +1,29 @@
 import ballerina/http;
-// import ballerina/io;
+import ballerina/io;
+
+type NewGreeting record {
+    string newfrom;
+    string newto;
+    string newmessage?;
+};
 
 type Greeting record {
     string 'from;
     string to;
     string message;
+    NewGreeting newGreeting?;
 };
 
-// type NewGreeting record {
-//     string newfrom;
-//     string newto;
-//     string newmessage?;
-// };
-
-// configurable map<Greeting> greetingMap = ?;
+configurable Greeting nestedGreeting = ?;
 // configurable Greeting|NewGreeting greetingN = ?;
 
 configurable string? nullString = "abc";
 
 service / on new http:Listener(8090) {
-    resource function get .(string name) returns Greeting {
+    resource function get .(string name) returns string {
         // io:println(greetingStrMap);
-        // io:println(greetingMap);
-        Greeting greetingMessage = {"from" : "name2", "to" : "name2", "message" : "BLUE"};
-        return greetingMessage;
+        io:println(nestedGreeting);
+        // Greeting greetingMessage = {"from" : "name2", "to" : "name2", "message" : "BLUE"};
+        return "greetingMessage";
     }
 }
