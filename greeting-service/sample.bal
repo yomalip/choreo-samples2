@@ -7,14 +7,16 @@ type Greeting record {
     string message;
 };
 
-type NewGreeting record {
-    string newfrom;
-    string newto;
-    string newmessage?;
-};
+// type NewGreeting record {
+//     string newfrom;
+//     string newto;
+//     string newmessage?;
+// };
 
 // configurable map<Greeting> greetingMap = ?;
-configurable Greeting|NewGreeting greetingN = ?;
+// configurable Greeting|NewGreeting greetingN = ?;
+
+configurable string? nullString = "abc";
 
 service / on new http:Listener(8090) {
     resource function get .(string name) returns Greeting {
