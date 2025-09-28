@@ -1,0 +1,32 @@
+apiVersion: v1
+items:
+- apiVersion: openchoreo.dev/v1alpha1
+  kind: Workload
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"openchoreo.dev/v1alpha1","kind":"Workload","metadata":{"annotations":{},"name":"react-starter","namespace":"default"},"spec":{"connections":{},"containers":{"main":{"args":[],"env":[{"key":"NODE_ENV","value":"production"},{"key":"PORT","value":"8080"}],"image":"choreoanonymouspullable.azurecr.io/react-spa:v0.9"}},"endpoints":{"webapp":{"port":8080,"type":"HTTP"}},"owner":{"componentName":"react-starter","projectName":"default"}}}
+    creationTimestamp: "2025-09-28T05:31:27Z"
+    generation: 1
+    name: goservice
+    namespace: default
+  spec:
+    connections: {}
+    containers:
+      main:
+        args: []
+        env:
+        - key: PORT
+          value: "8080"
+        image: docker.io/library/default-goservice:default-a5229767
+    endpoints:
+      api:
+        port: 8080
+        type: REST
+    owner:
+      componentName: goservice
+      projectName: default
+kind: List
+metadata:
+  resourceVersion: ""
+  
