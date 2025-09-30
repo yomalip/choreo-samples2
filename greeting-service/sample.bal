@@ -12,7 +12,7 @@ type Greeting record {
     string to;
     string message;
     NewGreeting[] newGreeting;
-    map<NewGreeting> greetingStrMap;
+    map<NewGreeting> greetingStrMap?;
 };
 
 configurable Greeting nestedGreeting = ?;
