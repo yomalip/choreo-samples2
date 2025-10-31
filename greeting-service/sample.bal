@@ -18,13 +18,14 @@ type Greeting record {
 
 configurable Greeting nestedGreeting = ?;
 // configurable Greeting|NewGreeting greetingN = ?;
-
 configurable string? nullString = "abc";
+configurable boolean isEnabled = ?;  // Added boolean configurable (required)
 
 service / on new http:Listener(8090) {
     resource function get .(string name) returns string {
         // io:println(greetingStrMap);
         io:println(nestedGreeting);
+        io:println("Is Enabled: ", isEnabled);
         // Greeting greetingMessage = {"from" : "name2", "to" : "name2", "message" : "BLUE"};
         return "greetingMessage";
     }
