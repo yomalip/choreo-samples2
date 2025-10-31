@@ -45,7 +45,7 @@ type DatabaseConfig record {
 };
 
 type CacheConfig record {
-    string type;
+    string cacheType;
     int ttl;
     boolean enabled;
     float memoryLimit;
@@ -86,7 +86,7 @@ type ServiceConfig record {
 };
 
 type Level3Nested record {
-    ServiceConfig service;
+    ServiceConfig serviceConfig;
     string environment;
     int replicaCount;
 };
@@ -208,28 +208,154 @@ configurable Greeting nestedGreeting = ?;
 configurable Level2Nested level2Config = ?;
 
 // Level 3 - Deeply nested object (RequiredLevel: 3)
-configurable Level3Nested level3Config = ?;
+configurable Level3Nested level3Config = {
+    serviceConfig: {
+        security: {
+            oauth: {
+                name: "",
+                clientId: "",
+                clientSecret: "",
+                tokenExpiry: 0,
+                enabled: false,
+                scopes: []
+            },
+            requireHttps: false,
+            sessionTimeout: 0
+        },
+        serviceName: "",
+        maxRetries: 0,
+        timeout: 0.0
+    },
+    environment: "",
+    replicaCount: 0
+};
 
 // Arrays
 configurable string[] tags = ["default"];
 configurable int[] numbers = [1, 2, 3];
-configurable NewGreeting[] greetingArray = ?;
+configurable NewGreeting[] greetingArray = [];
 
 // Maps
 configurable map<string> stringMap = {"key1": "value1"};
 configurable map<int> intMap = {"key1": 100};
-configurable map<NewGreeting> objectMap = ?;
+configurable map<NewGreeting> objectMap = {};
 
 // Union types
-configurable FlexibleConfig flexibleConfig = ?;
+configurable FlexibleConfig flexibleConfig = {
+    flexibleValue: "",
+    numericValue: 0,
+    mixedValue: ""
+};
 
 // Enum
-configurable LoggingConfig loggingConfig = ?;
+configurable LoggingConfig loggingConfig = {
+    level: DEBUG,
+    format: "",
+    maxFiles: 0
+};
 
 // Complex structures
-configurable ArrayConfig arrayConfig = ?;
-configurable ComplexMapConfig mapConfig = ?;
-configurable AdvancedConfig advancedConfig = ?;
+configurable ArrayConfig arrayConfig = {
+    stringArray: [],
+    intArray: [],
+    floatArray: [],
+    booleanArray: [],
+    objectArray: [],
+    mapArray: [],
+    nestedStringArray: [],
+    nestedIntArray: []
+};
+
+configurable ComplexMapConfig mapConfig = {
+    simpleStringMap: {},
+    simpleIntMap: {},
+    complexMap: {},
+    arrayMap: {},
+    objectMap: {}
+};
+
+configurable AdvancedConfig advancedConfig = {
+    apiKey: "",
+    maxConnections: 0,
+    rateLimit: 0.0,
+    precision: 0.0,
+    debugMode: false,
+    nested: {
+        database: {
+            host: "",
+            port: 0,
+            username: "",
+            sslEnabled: false,
+            connectionTimeout: 0.0,
+            maxPoolSize: 0.0,
+            allowedHosts: [],
+            ports: []
+        },
+        cache: {
+            cacheType: "",
+            ttl: 0,
+            enabled: false,
+            memoryLimit: 0.0,
+            evictionPolicies: []
+        },
+        appName: "",
+        appVersion: 0
+    },
+    deepNested: {
+        serviceConfig: {
+            security: {
+                oauth: {
+                    name: "",
+                    clientId: "",
+                    clientSecret: "",
+                    tokenExpiry: 0,
+                    enabled: false,
+                    scopes: []
+                },
+                requireHttps: false,
+                sessionTimeout: 0
+            },
+            serviceName: "",
+            maxRetries: 0,
+            timeout: 0.0
+        },
+        environment: "",
+        replicaCount: 0
+    },
+    endpoints: [],
+    ports: [],
+    greetings: [],
+    envVars: {},
+    thresholds: {},
+    configMap: {},
+    flexible: {
+        flexibleValue: "",
+        numericValue: 0,
+        mixedValue: ""
+    },
+    logging: {
+        level: DEBUG,
+        format: "",
+        maxFiles: 0
+    },
+    arrays: {
+        stringArray: [],
+        intArray: [],
+        floatArray: [],
+        booleanArray: [],
+        objectArray: [],
+        mapArray: [],
+        nestedStringArray: [],
+        nestedIntArray: []
+    },
+    maps: {
+        simpleStringMap: {},
+        simpleIntMap: {},
+        complexMap: {},
+        arrayMap: {},
+        objectMap: {}
+    }
+};
 
 // ============================================
 // SERVICE
@@ -247,7 +373,7 @@ service / on new http:Listener(8090) {
         json response = {
             "nestedGreeting": nestedGreeting.toJson(),
             "level2Config": level2Config.toJson(),
-            "level3Config": level3Config?.toJson(),
+            "level3Config": level3Config.toJson(),
             "nullString": nullString,
             "isEnabled": isEnabled,
             "maxRetries": maxRetries,
@@ -255,15 +381,15 @@ service / on new http:Listener(8090) {
             "price": price,
             "tags": tags,
             "numbers": numbers,
-            "greetingArray": greetingArray?.toJson(),
+            "greetingArray": greetingArray.toJson(),
             "stringMap": stringMap,
             "intMap": intMap,
-            "objectMap": objectMap?.toJson(),
-            "flexibleConfig": flexibleConfig?.toJson(),
-            "loggingConfig": loggingConfig?.toJson(),
-            "arrayConfig": arrayConfig?.toJson(),
-            "mapConfig": mapConfig?.toJson(),
-            "advancedConfig": advancedConfig?.toJson(),
+            "objectMap": objectMap.toJson(),
+            "flexibleConfig": flexibleConfig.toJson(),
+            "loggingConfig": loggingConfig.toJson(),
+            "arrayConfig": arrayConfig.toJson(),
+            "mapConfig": mapConfig.toJson(),
+            "advancedConfig": advancedConfig.toJson(),
             "requestName": name
         };
         
