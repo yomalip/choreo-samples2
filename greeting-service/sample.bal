@@ -27,9 +27,9 @@ service / on new http:Listener(8090) {
         io:println(nestedGreeting);
         io:println("Is Enabled: ", isEnabled);
         
-        // Return all configurables as JSON
+        // Return all configurables as JSON with explicit conversion
         json response = {
-            "nestedGreeting": nestedGreeting,
+            "nestedGreeting": nestedGreeting.toJson(),
             "nullString": nullString,
             "isEnabled": isEnabled,
             "requestName": name
