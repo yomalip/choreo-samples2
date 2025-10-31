@@ -11,7 +11,7 @@ type Greeting record {
     string 'from;
     string to;
     string message;
-    number age;
+    int age;
     NewGreeting[] newGreeting;
     map<NewGreeting> greetingStrMap?;
 };
