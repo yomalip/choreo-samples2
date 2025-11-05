@@ -2,10 +2,66 @@ import ballerina/http;
 import ballerina/io;
 
 // ============================================
-// LEVEL 2 - NESTED OBJECTS (RequiredLevel: 2)
+// LEVEL 3+ - DEEPLY NESTED OBJECTS (RequiredLevel: 3)
 // ============================================
 
-// Database configuration with multiple nested fields
+// Authentication provider configuration
+type AuthProvider record {
+    string name;
+    string clientId;
+    string clientSecret;
+    int tokenExpiry;
+    boolean enabled;
+    string[] scopes;
+};
+
+// Security configuration with nested auth providers
+type SecurityConfig record {
+    AuthProvider oauth;
+    AuthProvider saml?;
+    boolean requireHttps;
+    int sessionTimeout;
+};
+
+// Service configuration with nested security
+type ServiceConfig record {
+    SecurityConfig security;
+    string serviceName;
+    int maxRetries;
+    float timeout;
+};
+
+// Level 3 deeply nested structure
+type Level3Nested record {
+    ServiceConfig serviceConfig;
+    string environment;
+    int replicaCount;
+};
+
+// Complex map value type
+type MapValueType record {
+    string key;
+    int value;
+    boolean active;
+};
+
+// Complex map configuration
+type ComplexMapConfig record {
+    map<string> simpleStringMap;
+    map<int> simpleIntMap;
+    map<MapValueType> complexMap;
+    map<string[]> arrayMap;
+    map<AuthProvider> objectMap;
+};
+
+// Base greeting type for complex structures
+type NewGreeting record {
+    string newfrom;
+    string newto;
+    string newmessage?;
+};
+
+// Database config for advanced structure
 type DatabaseConfig record {
     string host;
     int port;
@@ -18,7 +74,7 @@ type DatabaseConfig record {
     int[] ports;
 };
 
-// Cache configuration with various types
+// Cache config for advanced structure
 type CacheConfig record {
     string cacheType;
     int ttl;
@@ -27,7 +83,7 @@ type CacheConfig record {
     string[] evictionPolicies;
 };
 
-// Level 2 nested structure combining multiple configs
+// Level 2 nested for embedding in advanced config
 type Level2Nested record {
     DatabaseConfig database;
     CacheConfig cache;
@@ -35,7 +91,7 @@ type Level2Nested record {
     int appVersion;
 };
 
-// Flexible configuration with union types
+// Flexible config with union types
 type FlexibleConfig record {
     string|int flexibleValue;
     string|null nullableString?;
@@ -43,7 +99,7 @@ type FlexibleConfig record {
     boolean|string mixedValue;
 };
 
-// Enum for logging levels
+// Logging levels enum
 enum LogLevel {
     DEBUG,
     INFO,
@@ -51,84 +107,205 @@ enum LogLevel {
     ERROR
 }
 
-// Logging configuration using enum
+// Logging configuration
 type LoggingConfig record {
     LogLevel level;
     string format;
     int maxFiles;
 };
 
-// Arrays of different types configuration
+// Array configuration
 type ArrayConfig record {
     string[] stringArray;
     int[] intArray;
     float[] floatArray;
     boolean[] booleanArray;
-    DatabaseConfig[] objectArray;
+    NewGreeting[] objectArray;
     map<string>[] mapArray;
     string[][] nestedStringArray;
     int[][] nestedIntArray;
 };
 
-// ============================================
-// LEVEL 2 CONFIGURABLE VARIABLES
-// ============================================
-
-// Main Level 2 nested configuration
-configurable Level2Nested level2Config = ?;
-
-// Flexible configuration with union types
-configurable FlexibleConfig flexibleConfig = {
-    flexibleValue: "",
-    numericValue: 0,
-    mixedValue: ""
+// Advanced configuration combining all levels
+type AdvancedConfig record {
+    // Level 1 primitives
+    string apiKey;
+    int maxConnections;
+    float rateLimit;
+    decimal precision;
+    boolean debugMode;
+    
+    // Level 2 nested
+    Level2Nested nested;
+    
+    // Level 3+ deeply nested
+    Level3Nested deepNested?;
+    
+    // Arrays
+    string[] endpoints;
+    int[] ports;
+    NewGreeting[] greetings;
+    
+    // Maps
+    map<string> envVars;
+    map<int> thresholds;
+    map<NewGreeting> configMap;
+    
+    // Union types
+    FlexibleConfig flexible?;
+    
+    // Enum
+    LoggingConfig logging;
+    
+    // Complex arrays
+    ArrayConfig arrays;
+    
+    // Complex maps
+    ComplexMapConfig maps;
 };
 
-// Logging configuration with enum
-configurable LoggingConfig loggingConfig = {
-    level: DEBUG,
-    format: "",
-    maxFiles: 0
+// ============================================
+// LEVEL 3 CONFIGURABLE VARIABLES
+// ============================================
+
+// Level 3 deeply nested configuration
+configurable Level3Nested level3Config = {
+    serviceConfig: {
+        security: {
+            oauth: {
+                name: "",
+                clientId: "",
+                clientSecret: "",
+                tokenExpiry: 0,
+                enabled: false,
+                scopes: []
+            },
+            requireHttps: false,
+            sessionTimeout: 0
+        },
+        serviceName: "",
+        maxRetries: 0,
+        timeout: 0.0
+    },
+    environment: "",
+    replicaCount: 0
 };
 
-// Array configuration
-configurable ArrayConfig arrayConfig = {
-    stringArray: [],
-    intArray: [],
-    floatArray: [],
-    booleanArray: [],
-    objectArray: [],
-    mapArray: [],
-    nestedStringArray: [],
-    nestedIntArray: []
+// Complex map configuration
+configurable ComplexMapConfig mapConfig = {
+    simpleStringMap: {},
+    simpleIntMap: {},
+    complexMap: {},
+    arrayMap: {},
+    objectMap: {}
+};
+
+// Advanced configuration with all levels
+configurable AdvancedConfig advancedConfig = {
+    apiKey: "",
+    maxConnections: 0,
+    rateLimit: 0.0,
+    precision: 0.0,
+    debugMode: false,
+    nested: {
+        database: {
+            host: "",
+            port: 0,
+            username: "",
+            sslEnabled: false,
+            connectionTimeout: 0.0,
+            maxPoolSize: 0.0,
+            allowedHosts: [],
+            ports: []
+        },
+        cache: {
+            cacheType: "",
+            ttl: 0,
+            enabled: false,
+            memoryLimit: 0.0,
+            evictionPolicies: []
+        },
+        appName: "",
+        appVersion: 0
+    },
+    deepNested: {
+        serviceConfig: {
+            security: {
+                oauth: {
+                    name: "",
+                    clientId: "",
+                    clientSecret: "",
+                    tokenExpiry: 0,
+                    enabled: false,
+                    scopes: []
+                },
+                requireHttps: false,
+                sessionTimeout: 0
+            },
+            serviceName: "",
+            maxRetries: 0,
+            timeout: 0.0
+        },
+        environment: "",
+        replicaCount: 0
+    },
+    endpoints: [],
+    ports: [],
+    greetings: [],
+    envVars: {},
+    thresholds: {},
+    configMap: {},
+    flexible: {
+        flexibleValue: "",
+        numericValue: 0,
+        mixedValue: ""
+    },
+    logging: {
+        level: DEBUG,
+        format: "",
+        maxFiles: 0
+    },
+    arrays: {
+        stringArray: [],
+        intArray: [],
+        floatArray: [],
+        booleanArray: [],
+        objectArray: [],
+        mapArray: [],
+        nestedStringArray: [],
+        nestedIntArray: []
+    },
+    maps: {
+        simpleStringMap: {},
+        simpleIntMap: {},
+        complexMap: {},
+        arrayMap: {},
+        objectMap: {}
+    }
 };
 
 // ============================================
 // SERVICE
 // ============================================
-service / on new http:Listener(8091) {
-    resource function get level2(string name) returns json {
-        io:println("=== Level 2 Configurations ===");
-        io:println("Nested Objects:");
-        io:println("  - Database Config: ", level2Config.database);
-        io:println("  - Cache Config: ", level2Config.cache);
-        io:println("  - App Name: ", level2Config.appName);
-        io:println("  - App Version: ", level2Config.appVersion);
-        io:println("\nFlexible Config:");
-        io:println("  - ", flexibleConfig);
-        io:println("\nLogging Config:");
-        io:println("  - Level: ", loggingConfig.level);
-        io:println("  - Format: ", loggingConfig.'format);
+service / on new http:Listener(8092) {
+    resource function get level3(string name) returns json {
+        io:println("=== Level 3 Configurations ===");
+        io:println("Deeply Nested Objects:");
+        io:println("  - Service Config: ", level3Config.serviceConfig);
+        io:println("  - Environment: ", level3Config.environment);
+        io:println("  - Replica Count: ", level3Config.replicaCount);
+        io:println("\nAdvanced Config:");
+        io:println("  - API Key: ", advancedConfig.apiKey);
+        io:println("  - Deep Nested: ", advancedConfig.deepNested);
         
-        // Return Level 2 configurables as JSON
+        // Return Level 3 configurables as JSON
         json response = {
-            "level": 2,
-            "description": "Nested objects with one level of nesting",
+            "level": 3,
+            "description": "Deeply nested objects with multiple levels of nesting",
             "configurations": {
-                "level2Config": level2Config.toJson(),
-                "flexibleConfig": flexibleConfig.toJson(),
-                "loggingConfig": loggingConfig.toJson(),
-                "arrayConfig": arrayConfig.toJson()
+                "level3Config": level3Config.toJson(),
+                "mapConfig": mapConfig.toJson(),
+                "advancedConfig": advancedConfig.toJson()
             },
             "requestName": name
         };
